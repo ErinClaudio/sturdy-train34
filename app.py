@@ -1,9 +1,20 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-import os
+from flask import Flask, render_template # request , jsonify
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_marshmallow import Marshmallow
+# import os
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/hello')
+def hello():
+    return render_template('hello.html')
+
+
+'''
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' + os.path.join(basedir, 'db.sqlite')
@@ -21,6 +32,7 @@ class Product(db.Model):
     price = db.Column(db.Float)
     qty = db.Column(db.Interger)
 
+
     def __init__(self, name, description, price, qty):
         self.name = name
         self.description = description
@@ -35,6 +47,7 @@ class ProductSchema(ma.Schema):
 
 product_schema = ProductSchema(strict=True)
 products_schema = ProductSchema(many=True, strict=True)
+'''
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
